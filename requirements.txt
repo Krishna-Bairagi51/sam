@@ -3,9 +3,8 @@ fastapi[all]
 opencv-python-headless
 numpy
 pillow
-torch
-torchvision
-torchaudio
+torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 supervision==0.4.0
 hf_xet
 runpod
+
