@@ -1,3 +1,4 @@
+# model_config.py
 from fastapi import HTTPException
 # from utilities.logger import LOGGER
 from settings import (
@@ -27,7 +28,7 @@ class KuberaModel:
         self.sam_checkpoint_path = sam_checkpoint_path
         self.SAM_PREDICTOR = None
         self.GROUNDING_DINO_MODEL = None
-        self.load_model()
+
 
     def load_model(self):
         """Load the model and tokenizer from the pretrained directory."""
@@ -46,25 +47,6 @@ class KuberaModel:
             ).to(device=SAM_DEVICE)
             self.SAM_PREDICTOR = SamPredictor(SAM)
             print(f'loaded SAM')
-
-                        
-  
         except Exception as e:
-            HTTPException(status_code=500, detail=f"Error loading the model: {e}")
-
-
-
-# Initialize the model and vector database
-# MODEL_OBJ = KuberaModel()
-
-
-# Access loaded components as needed
-
-# if MODEL_OBJ.GROUNDING_DINO_MODEL is not None:
-#     LOGGER.info("Grounding DINO model is ready for Detection.")
-
-# if MODEL_OBJ.SAM_PREDICTOR is not None:
-#     LOGGER.info("SAM model is ready for sagmentation.")
-
-
-
+            print(f"FATAL ERROR: Model loading failed: {e}")
+            raise  #Reraise so worker will not proceed
