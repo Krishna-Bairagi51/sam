@@ -1,3 +1,4 @@
+# rp_handler.py
 import runpod
 import base64
 import io
@@ -7,8 +8,12 @@ from api_handler import detect_and_segment_object
 # Load segmentation model(s) on startup
 print("Loading Kubera segmentation models...")
 MODEL_OBJ = KuberaModel()
-MODEL_OBJ.load_model()
-print("Models loaded.")
+try:
+    MODEL_OBJ.load_model()
+    print("Models loaded.")
+except Exception as e:
+    print(f"FATAL ERROR: Failed to load models: {e}")
+    raise  # Reraise to prevent the worker from starting
 
 def handler(event):
     print("Worker Start")
