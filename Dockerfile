@@ -9,6 +9,7 @@ COPY . /app
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
+RUN pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
 RUN apt-get update && apt-get install ffmpeg libsm6 libxext6 libgl1  -y
 # Copy and run the installation script for SAM and Grounding DINO
 COPY segmentation.sh /app/segmentation.sh
