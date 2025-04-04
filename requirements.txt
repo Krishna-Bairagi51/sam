@@ -1,0 +1,10 @@
+uvicorn
+fastapi[all]
+opencv-python-headless
+numpy
+pillow
+torch
+torchvision
+torchaudio
+supervision==0.4.0
+hf_xet
