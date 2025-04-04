@@ -1,5 +1,5 @@
 #!/bin/bash
-# cd ..
+set -e
 
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 # Clone and install GroundingDINO
@@ -21,10 +21,17 @@ mkdir weights
 cd weights
 
 wget -q https://github.com/IDEA-Research/GroundingDINO/releases/download/v0.1.0-alpha/groundingdino_swint_ogc.pth
+if [ ! -f "groundingdino_swint_ogc.pth" ]; then
+    echo "ERROR: Failed to download groundingdino_swint_ogc.pth"
+    exit 1
+fi
 
 # Download Segment Anything model weights
 wget -q https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth
+if [ ! -f "sam_vit_h_4b8939.pth" ]; then
+    echo "ERROR: Failed to download sam_vit_h_4b8939.pth"
+    exit 1
+fi
 
 # Navigate back to root directory
 echo "Setup completed successfully."
-
