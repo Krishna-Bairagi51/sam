@@ -15,7 +15,7 @@ COPY segmentation.sh /app/segmentation.sh
 RUN chmod +x /app/segmentation.sh && /app/segmentation.sh
 
 # Expose the port for uvicorn
-EXPOSE 8000
+# EXPOSE 8000
 
 # Command to run the server
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["python3", "-u", "rp_handler.py"]
