@@ -8,7 +8,7 @@ cd ..
 
 # Install segment-anything
 pip install 'git+https://github.com/facebookresearch/segment-anything.git'
-
+echo "Downloaded Sam"
 
 # Create weights directory and download GroundingDINO weights
 mkdir weights
