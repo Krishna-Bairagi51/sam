@@ -1,5 +1,5 @@
 # Use an official Python image as a base
-FROM python:3.10
+FROM runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04
 
 # Set the working directory
 WORKDIR /app
@@ -9,7 +9,6 @@ COPY . /app
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
-RUN pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
 RUN apt-get update && apt-get install ffmpeg libsm6 libxext6 libgl1  -y
 # Copy and run the installation script for SAM and Grounding DINO
 COPY segmentation.sh /app/segmentation.sh
