@@ -1,10 +1,4 @@
 #!/bin/bash
-set -e
-
-DIR="$( cd "$( dirname "$0" )" && pwd )"
-# Clone and install GroundingDINO
-cd $DIR
-git clone https://github.com/IDEA-Research/GroundingDINO.git
 cd GroundingDINO
 git checkout -q 57535c5a79791cb76e36fdb64975271354f10251
 pip install -q -e .
