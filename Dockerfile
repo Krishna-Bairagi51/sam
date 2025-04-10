@@ -19,9 +19,10 @@ RUN apt-get update && \
         libxext6 \
         libgl1 \
         # Ensure build tools for C++/CUDA compilation are present
-        build-essential && \ # Ensure backslash is THE LAST character on this line
+        build-essential && \
     # Clean up apt caches
     apt-get clean && \
+    # Remove apt lists to reduce image size
     rm -rf /var/lib/apt/lists/*
 
 # Make the script executable and run it to install models/extensions
