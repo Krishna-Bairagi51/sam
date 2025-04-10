@@ -1,5 +1,4 @@
-# model_config.py
-from fastapi import HTTPException
+
 # from utilities.logger import LOGGER
 from settings import (
     GROUNDING_DINO_CONFIG_PATH,
@@ -10,8 +9,6 @@ from settings import (
 )
 import torch
 import sys, os
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from GroundingDINO.groundingdino.util.inference import Model
 from segment_anything import sam_model_registry, SamPredictor
 
