@@ -18,12 +18,13 @@ RUN apt-get update && \
         libsm6 \
         libxext6 \
         libgl1 \
-        # Added build-essential for compiling C++/CUDA (Comment moved here)
-        build-essential && \ # Backslash is now the last non-whitespace character
+        # Ensure build tools for C++/CUDA compilation are present
+        build-essential && \ # Ensure backslash is THE LAST character on this line
+    # Clean up apt caches
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Make the script executable and run it
+# Make the script executable and run it to install models/extensions
 RUN chmod +x ./segmentation.sh && ./segmentation.sh
 
 # Copy the rest of your application code
