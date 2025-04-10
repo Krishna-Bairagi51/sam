@@ -4,8 +4,7 @@ FROM runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04
 # Set the working directory
 WORKDIR /app
 
-# Copy the current directory contents into the container
-# It's often better to copy only necessary files first (requirements, scripts)
+# Copy necessary files first
 COPY requirements.txt ./
 COPY segmentation.sh ./
 
@@ -19,17 +18,18 @@ RUN apt-get update && \
         libsm6 \
         libxext6 \
         libgl1 \
-        build-essential && \ # Added build-essential for compiling C++/CUDA
+        # Added build-essential for compiling C++/CUDA (Comment moved here)
+        build-essential && \ # Backslash is now the last non-whitespace character
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Make the script executable and run it to install models and compile extensions
+# Make the script executable and run it
 RUN chmod +x ./segmentation.sh && ./segmentation.sh
 
 # Copy the rest of your application code
 COPY . /app
 
-# Expose the port (Optional for RunPod serverless, but good practice)
+# Expose the port (Optional for RunPod serverless)
 # EXPOSE 8000
 
 # Command to run the server
