@@ -1,23 +1,19 @@
 # syntax=docker/dockerfile:1
 FROM runpod/pytorch:2.2.0-py3.10-cuda12.1.1-devel-ubuntu22.04
 
+# Set the working directory
 WORKDIR /app
-COPY . /app
 
-# Install OS packages (including git, ffmpeg, OpenCV deps) in one RUN
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-      git \
-      ffmpeg \
-      libsm6 \
-      libxext6 \
-      libgl1 && \
-    rm -rf /var/lib/apt/lists/*
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy and execute segmentation script with verbose logging
+RUN apt-get update && apt-get install ffmpeg libsm6 libxext6 libgl1  -y
+# Copy and run the installation script for SAM and Grounding DINO
 COPY segmentation.sh /app/segmentation.sh
-RUN chmod +x /app/segmentation.sh && \
-    bash -x /app/segmentation.sh
+RUN chmod +x /app/segmentation.sh && /app/segmentation.sh
 
-EXPOSE 8000
+# Expose the port for uvicorn
+# EXPOSE 8000
+
+# Command to run the server
 CMD ["python3", "-u", "rp_handler.py"]
