@@ -20,4 +20,4 @@ COPY segmentation.sh rp_handler.py entrypoint.sh ./
 RUN chmod +x segmentation.sh && ./segmentation.sh
 
 # Entrypoint to auto-detect CUDA_HOME and launch handler
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["./segmentation.sh"]
