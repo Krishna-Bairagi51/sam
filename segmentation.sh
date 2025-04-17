@@ -1,4 +1,10 @@
 #!/bin/bash
+#!/usr/bin/env bash
+# Auto‑detect CUDA_HOME if not already set
+if [ -z "$CUDA_HOME" ] && command -v nvcc &>/dev/null; then
+  export CUDA_HOME="$(dirname "$(dirname "$(which nvcc)")")"
+  echo "🚀 CUDA_HOME auto‑set to $CUDA_HOME"
+fi
 set -e # Exit immediately if a command exits with a non-zero status.
 
 echo "Starting segmentation setup script..."
